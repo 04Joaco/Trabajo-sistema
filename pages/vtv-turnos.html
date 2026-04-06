@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VTV Online – Turnos</title>
+<link rel="stylesheet" href="../css/styleTurno.css">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800;900&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- =============================================
+       NAVIGATION BAR
+  ============================================= -->
+  <nav>
+    <!-- Logo -->
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">
+        <!-- Simple car icon -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11C5.84 5 5.28 5.42 5.08 6.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+        </svg>
+      </div>
+      <div class="nav-logo-text">
+        <span class="brand">VTV</span>
+        <span class="sub">Online</span>
+      </div>
+    </a>
+
+    <!-- Navigation Links -->
+    <ul class="nav-links">
+      <li><a href="../index..html">Inicio</a></li>
+      <li><a href="#requisitos">Requisitos</a></li>
+      <li><a href="./pages/vtv-turnos.html">Turnos</a></li>
+      <li><a href="#">Contacto</a></li>
+    </ul>
+  </nav>
+
+<!-- STEPS BAR -->
+<div class="steps-bar">
+  <div class="step-item">
+    <div class="step-circle active" id="sc1">1</div>
+    <span class="step-label active" id="sl1">Planta &amp; Vehículo</span>
+  </div>
+  <div class="step-line" id="line1"></div>
+  <div class="step-item">
+    <div class="step-circle" id="sc2">2</div>
+    <span class="step-label" id="sl2">Fecha &amp; Hora</span>
+  </div>
+  <div class="step-line" id="line2"></div>
+  <div class="step-item">
+    <div class="step-circle" id="sc3">3</div>
+    <span class="step-label" id="sl3">Confirmar</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ─── STEP 1 ─── -->
+  <div id="step1" class="two-col">
+    <!-- Plants -->
+    <div class="card">
+      <div class="card-title"><span class="step-badge">1</span> Seleccioná la Planta</div>
+      <div class="plant-list" id="plant-list">
+        <div class="plant-item" data-id="laplata" data-name="La Plata" onclick="selectPlant(this)">
+          <div class="plant-icon">🏭</div>
+          <div>
+            <div class="plant-name">La Plata</div>
+            <div class="plant-addr">Av. 44 N°1234, La Plata</div>
+            <div class="plant-avail">● Disponible</div>
+          </div>
+          <div class="plant-check">✓</div>
+        </div>
+        <div class="plant-item" data-id="moron" data-name="Morón" onclick="selectPlant(this)">
+          <div class="plant-icon">🏭</div>
+          <div>
+            <div class="plant-name">Morón</div>
+            <div class="plant-addr">Av. Rivadavia 5678, Morón</div>
+            <div class="plant-avail">● Disponible</div>
+          </div>
+          <div class="plant-check">✓</div>
+        </div>
+        <div class="plant-item" data-id="sanmartin" data-name="San Martín" onclick="selectPlant(this)">
+          <div class="plant-icon">🏭</div>
+          <div>
+            <div class="plant-name">San Martín</div>
+            <div class="plant-addr">Belgrano 910, San Martín</div>
+            <div class="plant-avail">● Disponible</div>
+          </div>
+          <div class="plant-check">✓</div>
+        </div>
+        <div class="plant-item" data-id="quilmes" data-name="Quilmes" onclick="selectPlant(this)">
+          <div class="plant-icon">🏭</div>
+          <div>
+            <div class="plant-name">Quilmes</div>
+            <div class="plant-addr">Hipólito Yrigoyen 2345, Quilmes</div>
+            <div class="plant-avail">● Disponible</div>
+          </div>
+          <div class="plant-check">✓</div>
+        </div>
+      </div>
+      <div class="err-msg hidden" id="err-plant">Seleccioná una planta</div>
+    </div>
+
+    <!-- Vehicle -->
+    <div class="card">
+      <div class="card-title"><span class="step-badge">2</span> Datos del Vehículo</div>
+
+      <label class="lbl">Patente</label>
+      <input class="inp" id="patente" placeholder="AA 123 CD" />
+      <div class="err-msg hidden" id="err-patente">Ingresá la patente</div>
+
+      <label class="lbl">Tipo de Vehículo</label>
+      <select class="sel" id="tipo">
+        <option value="">Seleccionar...</option>
+        <option>Auto</option><option>Camioneta</option><option>Moto</option>
+        <option>Camión</option><option>Remis/Taxi</option>
+      </select>
+      <div class="err-msg hidden" id="err-tipo">Seleccioná el tipo</div>
+
+      <div class="row2">
+        <div>
+          <label class="lbl">Marca</label>
+          <select class="sel" id="marca">
+            <option value="">Seleccionar...</option>
+            <option>Fiat</option><option>Ford</option><option>Chevrolet</option>
+            <option>Volkswagen</option><option>Toyota</option><option>Renault</option>
+            <option>Peugeot</option><option>Honda</option><option>Otro</option>
+          </select>
+          <div class="err-msg hidden" id="err-marca">Seleccioná la marca</div>
+        </div>
+        <div>
+          <label class="lbl">Modelo</label>
+          <input class="inp" id="modelo" placeholder="Cronos" />
+          <div class="err-msg hidden" id="err-modelo">Ingresá el modelo</div>
+        </div>
+      </div>
+
+      <label class="lbl">Año</label>
+      <select class="sel" id="anio" style="max-width:160px"></select>
+
+      <button class="btn-primary" style="margin-top:24px" onclick="goStep2()">Continuar →</button>
+    </div>
+  </div>
+
+  <!-- ─── STEP 2 ─── -->
+  <div id="step2" class="two-col hidden">
+    <!-- Calendar -->
+    <div class="card">
+      <div class="card-title"><span class="step-badge">3</span> Elegir Turno</div>
+      <div class="cal-header">
+        <button class="cal-nav" onclick="prevMonth()">‹</button>
+        <span class="cal-month" id="cal-month-title"></span>
+        <button class="cal-nav" onclick="nextMonth()">›</button>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+      <div class="cal-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#bbf7d0"></div>Disponible</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#fed7aa"></div>Parcial</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#fecaca"></div>Completo</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#0f2952"></div>Seleccionado</div>
+      </div>
+      <div class="err-msg hidden" id="err-day">Seleccioná un día</div>
+      <div id="times-section" class="hidden">
+        <div class="times-title" id="times-title">Horarios disponibles</div>
+        <div class="times-grid" id="times-grid"></div>
+        <div class="err-msg hidden" id="err-time">Seleccioná un horario</div>
+      </div>
+    </div>
+
+    <!-- Summary step 2 -->
+    <div class="card">
+      <div class="card-title">Resumen de Selección</div>
+      <div class="summary-box">
+        <div class="summary-row"><span class="summary-label">Planta</span><span class="summary-value" id="sum2-plant">—</span></div>
+        <div class="summary-row"><span class="summary-label">Patente</span><span class="summary-value" id="sum2-pat">—</span></div>
+        <div class="summary-row"><span class="summary-label">Vehículo</span><span class="summary-value" id="sum2-veh">—</span></div>
+        <div class="summary-row"><span class="summary-label">Fecha</span><span class="summary-value" id="sum2-date">—</span></div>
+        <div class="summary-row"><span class="summary-label">Hora</span><span class="summary-value" id="sum2-time">—</span></div>
+      </div>
+      <div class="btn-group">
+        <button class="btn-secondary" onclick="goStep1()">← Volver</button>
+        <button class="btn-primary" onclick="goStep3()">Continuar →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── STEP 3 ─── -->
+  <div id="step3" class="two-col hidden">
+    <!-- Holder form -->
+    <div class="card">
+      <div class="card-title"><span class="step-badge">4</span> Datos del Titular</div>
+
+      <label class="lbl">Nombre y Apellido</label>
+      <input class="inp" id="nombre" placeholder="Juan Pérez" />
+      <div class="err-msg hidden" id="err-nombre">Campo requerido</div>
+
+      <label class="lbl">DNI</label>
+      <input class="inp" id="dni" placeholder="30.123.456" />
+      <div class="err-msg hidden" id="err-dni">Campo requerido</div>
+
+      <label class="lbl">Teléfono</label>
+      <input class="inp" id="tel" placeholder="11-1234-5678" />
+      <div class="err-msg hidden" id="err-tel">Campo requerido</div>
+
+      <label class="lbl">Email</label>
+      <input class="inp" id="email" placeholder="juan@email.com" type="email" />
+      <div class="err-msg hidden" id="err-email">Email inválido</div>
+    </div>
+
+    <!-- Final summary -->
+    <div class="card">
+      <div class="card-title">Resumen del Turno</div>
+      <div class="summary-box">
+        <div class="summary-row"><span class="summary-label">Fecha</span><span class="summary-value" id="sum3-date">—</span></div>
+        <div class="summary-row"><span class="summary-label">Hora</span><span class="summary-value" id="sum3-time">—</span></div>
+        <div class="summary-row"><span class="summary-label">Planta</span><span class="summary-value" id="sum3-plant">—</span></div>
+        <div class="summary-row"><span class="summary-label">Patente</span><span class="summary-value" id="sum3-pat">—</span></div>
+        <div class="summary-row"><span class="summary-label">Vehículo</span><span class="summary-value" id="sum3-veh">—</span></div>
+      </div>
+      <div class="total-box">
+        <span class="total-label">Tarifa VTV</span>
+        <span class="total-val">$8.500</span>
+      </div>
+      <div class="pay-badges">
+        <span class="pay-badge">💳 Tarjeta</span>
+        <span class="pay-badge">📱 MercadoPago</span>
+      </div>
+      <div class="btn-group">
+        <button class="btn-secondary" onclick="backToStep2()">← Volver</button>
+        <button class="btn-primary btn-orange" onclick="confirm()">Confirmar y Pagar</button>
+      </div>
+      <button class="btn-cancel" onclick="cancelAll()">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- ─── SUCCESS ─── -->
+  <div id="step-success" class="success-wrap hidden">
+    <div class="success-card">
+      <div class="success-icon">✓</div>
+      <div class="success-title">¡Turno Confirmado!</div>
+      <div class="summary-box" style="text-align:left">
+        <div class="summary-row"><span class="summary-label">Fecha</span><span class="summary-value" id="ok-date">—</span></div>
+        <div class="summary-row"><span class="summary-label">Hora</span><span class="summary-value" id="ok-time">—</span></div>
+        <div class="summary-row"><span class="summary-label">Planta</span><span class="summary-value" id="ok-plant">—</span></div>
+        <div class="summary-row"><span class="summary-label">Patente</span><span class="summary-value" id="ok-pat">—</span></div>
+        <div class="summary-row"><span class="summary-label">Titular</span><span class="summary-value" id="ok-name">—</span></div>
+      </div>
+      <p class="success-note">Recibirás la confirmación a <strong id="ok-email">—</strong></p>
+      <button class="btn-primary" onclick="resetAll()">Sacar otro turno</button>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+// ── STATE ──────────────────────────────────────────────────────────────
+const TIME_SLOTS = ['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30'];
+const MONTHS = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
+const DAY_NAMES = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+
+let state = {
+  plant: null,
+  calYear: new Date().getFullYear(),
+  calMonth: new Date().getMonth(),
+  selectedDay: null,
+  selectedTime: null,
+  appointments: {}
+};
+
+// Load from localStorage
+try {
+  const saved = localStorage.getItem('vtv_appts');
+  if (saved) state.appointments = JSON.parse(saved);
+} catch(e) {}
+
+// Populate year select
+(function(){
+  const sel = document.getElementById('anio');
+  const y = new Date().getFullYear();
+  for (let i = y; i >= y - 24; i--) {
+    const o = document.createElement('option');
+    o.value = i; o.textContent = i;
+    sel.appendChild(o);
+  }
+})();
+
+// ── HELPERS ───────────────────────────────────────────────────────────
+function apptKey(plantId, y, m, d, t) {
+  return `${plantId}_${y}-${pad(m+1)}-${pad(d)}_${t}`;
+}
+function pad(n) { return String(n).padStart(2,'0'); }
+function isTaken(d, t) {
+  if (!state.plant) return false;
+  return !!state.appointments[apptKey(state.plant.id, state.calYear, state.calMonth, d, t)];
+}
+function isDayFull(d) { return TIME_SLOTS.every(t => isTaken(d, t)); }
+function hasSome(d)   { return TIME_SLOTS.some(t => isTaken(d, t)) && !isDayFull(d); }
+function isPast(d) {
+  const t = new Date(); t.setHours(0,0,0,0);
+  const dt = new Date(state.calYear, state.calMonth, d);
+  return dt < t;
+}
+function fmtDate(d, m, y) { return `${pad(d)}/${pad(m+1)}/${y}`; }
+
+// ── PLANT SELECT ───────────────────────────────────────────────────────
+function selectPlant(el) {
+  document.querySelectorAll('.plant-item').forEach(p => p.classList.remove('selected'));
+  el.classList.add('selected');
+  state.plant = { id: el.dataset.id, name: el.dataset.name };
+  hide('err-plant');
+  if (state.selectedDay) buildCalendar(); // refresh if already on step 2
+}
+
+// ── STEP NAVIGATION ───────────────────────────────────────────────────
+function goStep2() {
+  if (!validateStep1()) return;
+  setStep(2);
+  buildCalendar();
+  updateSummary2();
+}
+
+function goStep1() { setStep(1); }
+
+function goStep3() {
+  if (!validateStep2()) return;
+  setStep(3);
+  updateSummary3();
+}
+
+function backToStep2() { setStep(2); }
+
+function setStep(n) {
+  [1,2,3].forEach(i => {
+    show_hide(`step${i}`, i === n);
+    const sc = document.getElementById(`sc${i}`);
+    const sl = document.getElementById(`sl${i}`);
+    sc.className = 'step-circle' + (i < n ? ' done' : i === n ? ' active' : '');
+    sc.textContent = i < n ? '✓' : i;
+    sl.className = 'step-label' + (i <= n ? ' active' : '');
+    if (i < 3) {
+      const line = document.getElementById(`line${i}`);
+      line.className = 'step-line' + (i < n ? ' done' : '');
+    }
+  });
+  hide('step-success');
+}
+
+function show_hide(id, show) {
+  document.getElementById(id).classList.toggle('hidden', !show);
+}
+function hide(id) { document.getElementById(id).classList.add('hidden'); }
+function show(id) { document.getElementById(id).classList.remove('hidden'); }
+
+// ── CALENDAR ──────────────────────────────────────────────────────────
+function buildCalendar() {
+  const grid = document.getElementById('cal-grid');
+  document.getElementById('cal-month-title').textContent =
+    MONTHS[state.calMonth] + ' ' + state.calYear;
+
+  grid.innerHTML = '';
+
+  // Day name headers
+  DAY_NAMES.forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'cal-day-name';
+    el.textContent = d;
+    grid.appendChild(el);
+  });
+
+  const firstDay = new Date(state.calYear, state.calMonth, 1).getDay();
+  const daysInMonth = new Date(state.calYear, state.calMonth + 1, 0).getDate();
+
+  // Empty cells before first day (week starts Sunday → adjust to Monday)
+  const offset = firstDay === 0 ? 6 : firstDay - 1;
+  for (let i = 0; i < offset; i++) {
+    const el = document.createElement('div');
+    el.className = 'cal-day empty';
+    grid.appendChild(el);
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const el = document.createElement('div');
+    el.textContent = d;
+    const past = isPast(d);
+    const full = isDayFull(d);
+    const partial = hasSome(d);
+    const selected = state.selectedDay === d;
+
+    let cls = 'cal-day';
+    if (past) cls += ' past';
+    else if (full) cls += ' full';
+    else if (partial) cls += ' partial';
+    if (selected) cls += ' selected';
+
+    el.className = cls;
+
+    if (!past && !full) {
+      const day = d;
+      el.addEventListener('click', () => selectDay(day));
+    }
+    grid.appendChild(el);
+  }
+
+  buildTimes();
+}
+
+function selectDay(d) {
+  state.selectedDay = d;
+  state.selectedTime = null;
+  hide('err-day');
+  buildCalendar();
+  buildTimes();
+  updateSummary2();
+}
+
+function buildTimes() {
+  if (!state.selectedDay) {
+    hide('times-section');
+    return;
+  }
+  show('times-section');
+  document.getElementById('times-title').textContent =
+    `Horarios disponibles — ${pad(state.selectedDay)}/${pad(state.calMonth+1)}`;
+
+  const grid = document.getElementById('times-grid');
+  grid.innerHTML = '';
+
+  TIME_SLOTS.forEach(t => {
+    const el = document.createElement('div');
+    el.textContent = t;
+    const taken = isTaken(state.selectedDay, t);
+    const selected = state.selectedTime === t;
+    el.className = 'time-slot' + (taken ? ' taken' : '') + (selected ? ' selected' : '');
+    if (!taken) {
+      el.addEventListener('click', () => {
+        state.selectedTime = t;
+        hide('err-time');
+        buildTimes();
+        updateSummary2();
+      });
+    }
+    grid.appendChild(el);
+  });
+}
+
+function prevMonth() {
+  state.calMonth--;
+  if (state.calMonth < 0) { state.calMonth = 11; state.calYear--; }
+  state.selectedDay = null; state.selectedTime = null;
+  buildCalendar(); updateSummary2();
+}
+
+function nextMonth() {
+  state.calMonth++;
+  if (state.calMonth > 11) { state.calMonth = 0; state.calYear++; }
+  state.selectedDay = null; state.selectedTime = null;
+  buildCalendar(); updateSummary2();
+}
+
+// ── SUMMARIES ─────────────────────────────────────────────────────────
+function vehText() {
+  const m = document.getElementById('marca').value;
+  const mo = document.getElementById('modelo').value;
+  return m && mo ? `${m} ${mo}` : (m || mo || '—');
+}
+
+function updateSummary2() {
+  document.getElementById('sum2-plant').textContent = state.plant?.name || '—';
+  document.getElementById('sum2-pat').textContent = (document.getElementById('patente').value || '—').toUpperCase();
+  document.getElementById('sum2-veh').textContent = vehText();
+  document.getElementById('sum2-date').textContent = state.selectedDay
+    ? fmtDate(state.selectedDay, state.calMonth, state.calYear) : '—';
+  document.getElementById('sum2-time').textContent = state.selectedTime || '—';
+}
+
+function updateSummary3() {
+  const dateStr = state.selectedDay ? fmtDate(state.selectedDay, state.calMonth, state.calYear) : '—';
+  document.getElementById('sum3-date').textContent = dateStr;
+  document.getElementById('sum3-time').textContent = state.selectedTime || '—';
+  document.getElementById('sum3-plant').textContent = state.plant?.name || '—';
+  document.getElementById('sum3-pat').textContent = (document.getElementById('patente').value || '—').toUpperCase();
+  document.getElementById('sum3-veh').textContent = vehText();
+}
+
+// ── VALIDATION ────────────────────────────────────────────────────────
+function validateStep1() {
+  let ok = true;
+  if (!state.plant) { show('err-plant'); ok = false; } else hide('err-plant');
+  const fields = ['patente','tipo','marca','modelo'];
+  fields.forEach(f => {
+    const val = document.getElementById(f).value.trim();
+    const err = document.getElementById(`err-${f}`);
+    if (!val) { err.classList.remove('hidden'); document.getElementById(f).classList.add('err'); ok = false; }
+    else { err.classList.add('hidden'); document.getElementById(f).classList.remove('err'); }
+  });
+  return ok;
+}
+
+function validateStep2() {
+  let ok = true;
+  if (!state.selectedDay) { show('err-day'); ok = false; } else hide('err-day');
+  if (!state.selectedTime) { show('err-time'); ok = false; } else hide('err-time');
+  return ok;
+}
+
+function validateStep3() {
+  let ok = true;
+  ['nombre','dni','tel'].forEach(f => {
+    const val = document.getElementById(f).value.trim();
+    const err = document.getElementById(`err-${f}`);
+    if (!val) { err.classList.remove('hidden'); document.getElementById(f).classList.add('err'); ok = false; }
+    else { err.classList.add('hidden'); document.getElementById(f).classList.remove('err'); }
+  });
+  const email = document.getElementById('email').value.trim();
+  const errEmail = document.getElementById('err-email');
+  if (!email || !email.includes('@')) {
+    errEmail.classList.remove('hidden');
+    document.getElementById('email').classList.add('err');
+    ok = false;
+  } else {
+    errEmail.classList.add('hidden');
+    document.getElementById('email').classList.remove('err');
+  }
+  return ok;
+}
+
+// ── CONFIRM ───────────────────────────────────────────────────────────
+function confirm() {
+  if (!validateStep3()) return;
+
+  const key = apptKey(state.plant.id, state.calYear, state.calMonth, state.selectedDay, state.selectedTime);
+  state.appointments[key] = {
+    nombre: document.getElementById('nombre').value,
+    patente: document.getElementById('patente').value.toUpperCase()
+  };
+  try { localStorage.setItem('vtv_appts', JSON.stringify(state.appointments)); } catch(e) {}
+
+  const dateStr = fmtDate(state.selectedDay, state.calMonth, state.calYear);
+  document.getElementById('ok-date').textContent = dateStr;
+  document.getElementById('ok-time').textContent = state.selectedTime;
+  document.getElementById('ok-plant').textContent = state.plant.name;
+  document.getElementById('ok-pat').textContent = document.getElementById('patente').value.toUpperCase();
+  document.getElementById('ok-name').textContent = document.getElementById('nombre').value;
+  document.getElementById('ok-email').textContent = document.getElementById('email').value;
+
+  [1,2,3].forEach(i => hide(`step${i}`));
+  show('step-success');
+  // update step circles to all done
+  [1,2,3].forEach(i => {
+    const sc = document.getElementById(`sc${i}`);
+    sc.className = 'step-circle done'; sc.textContent = '✓';
+    document.getElementById(`sl${i}`).className = 'step-label active';
+    if (i < 3) document.getElementById(`line${i}`).className = 'step-line done';
+  });
+}
+
+// ── RESET ─────────────────────────────────────────────────────────────
+function cancelAll() {
+  if (confirm('¿Cancelar el turno?')) resetAll();
+}
+
+function resetAll() {
+  state.plant = null;
+  state.selectedDay = null;
+  state.selectedTime = null;
+  // reset form
+  ['patente','modelo','nombre','dni','tel','email'].forEach(f => {
+    document.getElementById(f).value = '';
+    document.getElementById(f).classList.remove('err');
+  });
+  document.getElementById('tipo').value = '';
+  document.getElementById('marca').value = '';
+  document.querySelectorAll('.plant-item').forEach(p => p.classList.remove('selected'));
+  // reset to current month
+  const now = new Date();
+  state.calYear = now.getFullYear();
+  state.calMonth = now.getMonth();
+
+  hide('step-success');
+  setStep(1);
+}
+</script>
+</body>
+</html>
